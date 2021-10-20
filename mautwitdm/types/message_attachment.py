@@ -26,6 +26,8 @@ class OriginalImageSizeInfo(SerializableAttrs):
     width: int
     height: int
 
+    url: Optional[str] = None
+
 
 @dataclass
 class VideoVariant(SerializableAttrs):

@@ -11,6 +11,7 @@ from attr import dataclass
 from mautrix.types import SerializableAttrs, SerializableEnum
 
 from .util import StringTimestamp
+from .message_attachment import OriginalImageSizeInfo
 
 
 class ConversationType(SerializableEnum):
@@ -37,12 +38,25 @@ class Participant(SerializableAttrs):
 
 
 @dataclass
+class ConversationImage(SerializableAttrs):
+    original_info: OriginalImageSizeInfo
+
+
+@dataclass
+class ConversationAvatar(SerializableAttrs):
+    image: Optional[ConversationImage] = None
+
+
+@dataclass(kw_only=True)
 class Conversation(SerializableAttrs):
     conversation_id: str
     type: ConversationType
     participants: List[Participant]
     notifications_disabled: bool
     mention_notifications_disabled: bool
+    notifications_disabled: bool = False
+    muted: bool = False
+    nsfw: bool = False
     trusted: bool
     low_quality: bool
 
@@ -62,3 +76,5 @@ class Conversation(SerializableAttrs):
     created_by_user_id: Optional[str] = None
     name: Optional[str] = None
     last_read_event_id: Optional[str] = None
+    avatar_image_https: Optional[str] = None
+    avatar: Optional[ConversationAvatar] = None
