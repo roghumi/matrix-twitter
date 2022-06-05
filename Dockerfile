@@ -40,4 +40,6 @@ RUN apk add git && pip3 install .[e2be] && apk del git \
 VOLUME /data
 ENV UID=1337 GID=1337
 
+RUN chmod +x /opt/mautrix-twitter/docker-run.sh
+
 CMD ["/opt/mautrix-twitter/docker-run.sh"]
